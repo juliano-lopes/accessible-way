@@ -1,28 +1,30 @@
 package domain;
 
-public enum TelephoneType implements TelephoneDescriptionType {
-	CELL {
-		@Override
-		public String getDescriptionType() {
-			return "Cell Phone";
-		}
+public enum TelephoneType {
+	CELL(0, "Cell Phone"), PHONE(1, "Phone");
+	private int type;
+	private String description;
 
-		@Override
-		public int getValue() {
-			return 0;
-		}
+	TelephoneType(int type, String description) {
+		this.type = type;
+		this.description = description;
+	}
 
-	},
-	PHONE {
-		@Override
-		public String getDescriptionType() {
-			return "Telephone";
-		}
+	public int getType() {
+		return type;
+	}
 
-		@Override
-		public int getValue() {
-			return 1;
-		}
-	};
+	public String getDescription() {
+		return description;
+	}
 
+	public String getDescriptionByType(int type) {
+		for (TelephoneType telephone : TelephoneType.values()) {
+			if (telephone.getType() == type) {
+				return telephone.getDescription();
+			}
+		}
+		return "";
+
+	}
 }

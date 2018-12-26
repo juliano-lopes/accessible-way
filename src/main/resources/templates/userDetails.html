@@ -22,18 +22,32 @@
 
 	<table>
 		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>E-mail</th>
+			<th colspan="2">Details to <span th:text="${user.name}"></span>
+				user
+			</th>
 		</tr>
 		<tr>
-			<td th:text="${user.id}"></td>
+
+			<td>Name</td>
+			<td>E-mail</td>
+		</tr>
+		<tr>
+
 			<td th:text="${user.name}"></td>
 			<td th:text="${user.email}"></td>
+			<td>Telephone Type</td>
+			<td>Telephone Number</td>
 		</tr>
+		<tr th:each="telephone : ${telephones}">
+			<td th:text="${types[0].getDescriptionByType(telephone.type)}"></td>
+			<td th:text="${telephone.number}"></td>
+		</tr>
+
 	</table>
 	<h3>What is your new telephone number?</h3>
-	<form th:object="${user}" th:action="@{/saveTelephone/{userId}(userId=${user.id})}" method="post">
+	<form th:object="${user}"
+		th:action="@{/saveTelephone/{userId}(userId=${user.id})}"
+		method="post">
 
 
 

@@ -78,6 +78,7 @@ public class UserController {
 	public ModelAndView detail(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("userDetails");
 		mv.addObject("user", uRepo.findById(id).get());
+		mv.addObject("telephones", tRepo.findTelephoneByUserId(id));
 		mv.addObject("types", TelephoneType.values());
 		return mv;
 	}
@@ -87,7 +88,7 @@ public class UserController {
 		try {
 			tel.setUser(uRepo.findById(userId).get());
 			tRepo.save(tel);
-			return "redirect:/listUser";
+			return "redirect:/detail/" + userId;
 		} catch (Exception e) {
 			return "redirect:/home";
 
