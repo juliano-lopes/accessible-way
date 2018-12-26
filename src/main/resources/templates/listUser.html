@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Accessible Way</title>
+
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<h1>Your Accessible Way!</h1>
+
+	<h2>Listing User</h2>
+	<p>
+		<a id="l1" href="/signup">Sign-up</a>
+	</p>
+	<p>
+		<a href="/listUser">Listing User</a>
+	</p>
+	<h3>Search for:</h3>
+	<form action="/search" method="post">
+		<p>
+			<label for="nameUser">Name User</label> <input type="text"
+				name="nameUser">
+		</p>
+		<p>
+			<input type="submit" value="Search">
+		</p>
+
+	</form>
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>E-mail</th>
+			<th>Ação</th>
+		</tr>
+		<tr th:each="user : ${users}">
+			<td th:text="${user.id}"></td>
+			<td>
+			<a th:href="@{/detail/{id}(id=${user.id})}" th:text="${user.name}"></a>
+			 </td>
+			<td th:text="${user.email}"></td>
+			<td><a th:href="@{/edite/{id}(id=${user.id})}">Edite</a><br />
+				<a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+		</tr>
+
+
+
+
+	</table>
+	<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

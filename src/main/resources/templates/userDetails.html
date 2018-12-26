@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Accessible Way</title>
+
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<h1>Your Accessible Way!</h1>
+
+	<h2>User Details</h2>
+	<p>
+		<a id="l1" href="/signup">Sign-up</a>
+	</p>
+	<p>
+		<a href="/listUser">Listing User</a>
+	</p>
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>E-mail</th>
+		</tr>
+		<tr>
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.name}"></td>
+			<td th:text="${user.email}"></td>
+		</tr>
+	</table>
+	<h3>What is your new telephone number?</h3>
+	<form th:object="${user}" th:action="@{/saveTelephone/{userId}(userId=${user.id})}" method="post">
+
+
+
+		<p>
+			<label for="number">Number</label> <input type="text" name="number">
+		</p>
+		<p>
+			<label for="type">Type</label> <select name="type">
+
+
+				<option value="0">Cell</option>
+				<option value="1">Phone</option>
+
+			</select>
+		</p>
+		<p>
+			<input type="submit" name="save" value="Save">
+		</p>
+	</form>
+
+	<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
