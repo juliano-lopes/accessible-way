@@ -48,14 +48,18 @@
 
 	</table>
 	<h3>What is your new telephone number?</h3>
-	<form th:object="${user}"
+	<ul>
+		<li th:each="error : ${msgErrors}"><span th:text="${error}"></span></li>
+	</ul>
+	<form th:object="${tel}"
 		th:action="@{/saveTelephone/{userId}(userId=${user.id})}"
 		method="post">
 
 
 
 		<p>
-			<label for="number">Number</label> <input type="text" name="number">
+			<label for="number">Number</label> <input th:field="*{number}"
+				type="text" name="number">
 		</p>
 		<p>
 			<label for="type">Type</label> <select name="type">

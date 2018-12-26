@@ -1,10 +1,16 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,13 +42,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveUser(User user) {
-		try {
+	public ModelAndView saveUser(@Valid User user, BindingResult bResult) {
+		ModelAndView mv = new ModelAndView("/signup/signupUser");
+		List<String> msgErrors = new ArrayList<String>();
+		if (bResult.hasErrors()) {
+			for (ObjectError error : bResult.getAllErrors()) {
+				msgErrors.add(error.getDefaultMessage());
+			}
+		} else {
 			uRepo.save(user);
-			return "redirect:/listUser";
-		} catch (Exception e) {
-			return "erro ao salvar";
 		}
+		mv.addObject("user", user);
+		mv.addObject("msgErrors", msgErrors);
+		return mv;
 	}
 
 	@RequestMapping(value = "listUser", method = RequestMethod.GET)
@@ -80,18 +92,29 @@ public class UserController {
 		mv.addObject("user", uRepo.findById(id).get());
 		mv.addObject("telephones", tRepo.findTelephoneByUserId(id));
 		mv.addObject("types", TelephoneType.values());
+		mv.addObject("tel", new Telephone());
 		return mv;
 	}
 
 	@PostMapping("/saveTelephone/{userId}")
-	public String saveNewTelephoneNumber(@PathVariable("userId") long userId, Telephone tel) {
-		try {
+	public ModelAndView saveNewTelephoneNumber(@PathVariable("userId") long userId, @Valid Telephone tel,
+			BindingResult bResult) {
+		ModelAndView mv = new ModelAndView("userDetails");
+		List<String> msgErrors = new ArrayList<String>();
+		if (bResult.hasErrors()) {
+			for (ObjectError error : bResult.getAllErrors()) {
+				msgErrors.add(error.getDefaultMessage());
+			}
+		} else {
 			tel.setUser(uRepo.findById(userId).get());
 			tRepo.save(tel);
-			return "redirect:/detail/" + userId;
-		} catch (Exception e) {
-			return "redirect:/home";
 		}
+		mv.addObject("user", uRepo.findById(userId).get());
+		mv.addObject("telephones", tRepo.findTelephoneByUserId(userId));
+		mv.addObject("types", TelephoneType.values());
+		mv.addObject("tel", new Telephone());
+		mv.addObject("msgErrors", msgErrors);
+		return mv;
 	}
 
 	@GetMapping("/deleteTelephone/{telephoneId}")

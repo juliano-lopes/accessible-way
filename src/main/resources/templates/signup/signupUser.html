@@ -20,7 +20,10 @@
 	<p>
 		<a href="/listUser">Listing User</a>
 	</p>
-
+	<ul>
+		<li th:each="error : ${msgErrors}"><span th:text="${error}"></span>
+		</li>
+	</ul>
 	<form th:object="${user}" action="/save" method="post">
 
 		<input type="hidden" name="id" th:field="*{id}">
