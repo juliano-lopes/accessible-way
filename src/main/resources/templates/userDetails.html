@@ -40,7 +40,10 @@
 		</tr>
 		<tr th:each="telephone : ${telephones}">
 			<td th:text="${types[0].getDescriptionByType(telephone.type)}"></td>
-			<td th:text="${telephone.number}"></td>
+			<td><span th:text="${telephone.number}"></span> <a
+				th:href="@{/deleteTelephone/{telephoneId}(telephoneId=${telephone.id})}">Delete</a>
+
+			</td>
 		</tr>
 
 	</table>

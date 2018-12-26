@@ -91,7 +91,21 @@ public class UserController {
 			return "redirect:/detail/" + userId;
 		} catch (Exception e) {
 			return "redirect:/home";
-
 		}
 	}
+
+	@GetMapping("/deleteTelephone/{telephoneId}")
+	public String deleteTelephone(@PathVariable("telephoneId") long telephoneId) {
+		try {
+			Telephone tel = tRepo.findById(telephoneId).get();
+			long userId = tel.getUser().getId();
+			tRepo.delete(tel);
+			return "redirect:/detail/" + userId;
+		} catch (Exception e) {
+			return "redirect:/home";
+
+		}
+
+	}
+
 }
