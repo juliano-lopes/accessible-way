@@ -1,11 +1,11 @@
-package repository;
+package com.julopes.accessibleway.repository;
 
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import domain.User;
+import com.julopes.accessibleway.domain.User;
 
 @Repository
 @Transactional

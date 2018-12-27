@@ -1,4 +1,4 @@
-package domain;
+package com.julopes.accessibleway.domain;
 
 public enum TelephoneType {
 	CELL(0, "Cell Phone"), PHONE(1, "Phone");

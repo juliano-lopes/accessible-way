@@ -1,4 +1,4 @@
-package domain;
+package com.julopes.accessibleway.domain;
 
 import java.util.List;
 

@@ -8,15 +8,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EntityScan(basePackages = { "domain" })
-@ComponentScan(basePackages = { "controller" })
-@EnableJpaRepositories(basePackages = { "repository" })
+@EntityScan(basePackages = { "com.julopes.accessibleway.domain" })
+@ComponentScan(basePackages = { "com.julopes.accessibleway.*" })
+@EnableJpaRepositories(basePackages = { "com.julopes.accessibleway.repository" })
 @EnableTransactionManagement
 
 public class AccessibleWayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AccessibleWayApplication.class, args);
+		/*
+		 * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); String result =
+		 * encoder.encode("123"); System.out.println(result);
+		 */
 	}
 
 }

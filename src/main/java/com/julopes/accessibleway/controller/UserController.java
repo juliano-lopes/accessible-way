@@ -1,4 +1,4 @@
-package controller;
+package com.julopes.accessibleway.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Telephone;
-import domain.TelephoneType;
-import domain.User;
-import repository.TelephoneRepository;
-import repository.UserRepository;
+import com.julopes.accessibleway.domain.Telephone;
+import com.julopes.accessibleway.domain.TelephoneType;
+import com.julopes.accessibleway.domain.User;
+import com.julopes.accessibleway.repository.TelephoneRepository;
+import com.julopes.accessibleway.repository.UserRepository;
 
 @Controller
 public class UserController {
