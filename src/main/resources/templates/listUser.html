@@ -11,14 +11,13 @@
 </head>
 <body>
 	<h1>Your Accessible Way!</h1>
+	<ul>
+		<li><a id="l1" href="/signup">Sign-up</a></li>
+		<li><a href="/listUser">Listing User</a></li>
+		<li><a href="/logout">Sair</a></li>
+	</ul>
 
 	<h2>Listing User</h2>
-	<p>
-		<a id="l1" href="/signup">Sign-up</a>
-	</p>
-	<p>
-		<a href="/listUser">Listing User</a>
-	</p>
 	<h3>Search for:</h3>
 	<form action="/search" method="post">
 		<p>
@@ -40,9 +39,8 @@
 		</tr>
 		<tr th:each="user : ${users}">
 			<td th:text="${user.id}"></td>
-			<td>
-			<a th:href="@{/detail/{id}(id=${user.id})}" th:text="${user.name}"></a>
-			 </td>
+			<td><a th:href="@{/detail/{id}(id=${user.id})}"
+				th:text="${user.name}"></a></td>
 			<td th:text="${user.email}"></td>
 			<td><a th:href="@{/edite/{id}(id=${user.id})}">Edite</a><br />
 				<a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>

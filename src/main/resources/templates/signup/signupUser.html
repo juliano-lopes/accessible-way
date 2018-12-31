@@ -13,13 +13,13 @@
 
 <body>
 	<h1>Your Accessible Way</h1>
+	<ul>
+		<li><a id="l1" href="/signup">Sign-up</a></li>
+		<li><a href="/listUser">Listing User</a></li>
+		<li><a href="/logout">Sair</a></li>
+	</ul>
+
 	<h2>Sign-up</h2>
-	<p>
-		<a id="l1" href="/signup">Sign-up</a>
-	</p>
-	<p>
-		<a href="/listUser">Listing User</a>
-	</p>
 	<ul>
 		<li th:each="error : ${msgErrors}"><span th:text="${error}"></span>
 		</li>
