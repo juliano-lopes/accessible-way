@@ -58,32 +58,26 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "listUser", method = RequestMethod.GET)
-	public ModelAndView listUser() {
-		ModelAndView mv = new ModelAndView("listUser");
-		mv.addObject("users", uRepo.findAll());
-		return mv;
+	public List<User> listUser() {
+		return (List<User>) uRepo.findAll();
 	}
 
 	@RequestMapping(value = "/edite/{id}", method = RequestMethod.GET)
-	public ModelAndView edite(@PathVariable("id") long id) {
+	public User edite(@PathVariable("id") long id) {
 		Optional<User> opUser = uRepo.findById(id);
-		return new ModelAndView("/signup/signupUser").addObject("user", opUser.get());
+		return opUser.get();
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") long id) {
-		try {
-			uRepo.delete(uRepo.findById(id).get());
-			return "redirect:/listUser";
-		} catch (Exception e) {
-			return "redirect:/home";
-		}
+		uRepo.delete(uRepo.findById(id).get());
+		return "redirect:/listUser";
 	}
 
 	@PostMapping("/search")
 	@Query("select u from user u where u.name like %?1%")
-	public ModelAndView searchUserByName(@RequestParam("nameUser") String nameUser) {
-		return new ModelAndView("listUser").addObject("users", uRepo.findByName(nameUser));
+	public List<User> searchUserByName(@RequestParam("nameUser") String nameUser) {
+		return uRepo.findByName(nameUser);
 	}
 
 	@GetMapping("/detail/{id}")
